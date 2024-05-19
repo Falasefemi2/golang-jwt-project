@@ -1,35 +1,3 @@
-// package helpers
-
-// import (
-// 	"errors"
-
-// 	"github.com/gin-gonic/gin"
-// )
-
-// func CheckUserType(c *gin.Context, role string) (err error) {
-// 	userType := c.GetString("user_type")
-// 	err = nil
-// 	if userType != role {
-// 		err = errors.New("You are not authorized to perform this action")
-// 		return err
-// 	}
-// 	return err
-// }
-
-// func MatchUserTypeToUid(c *gin.Context, userId string) (err error) {
-// 	userType := c.GetStringMap("user_type")
-// 	uid := c.GetString("uid")
-// 	err = nil
-
-// 	if userType == "USER" && uid != userId {
-// 		err = errors.New("You are not authorized to perform this action")
-// 		return err
-// 	}
-
-// 	err = CheckUserType(c, userType)
-// 	return err
-// }
-
 package helpers
 
 import (
