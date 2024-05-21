@@ -22,14 +22,6 @@ import (
 var userCollection *mongo.Collection = database.OpenCollection(database.Client, "user")
 var validate = validator.New()
 
-// func HashPassword(password string) string {
-// 	 bcrypt.GenerateFromPassword([]byte(password), 14)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	return string(bytes)
-// }
-
 func HashPassword(password string) string {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	if err != nil {
@@ -120,46 +112,6 @@ func SignUp() gin.HandlerFunc {
 		c.JSON(http.StatusOK, gin.H{"message": "User successfully registered"})
 	}
 }
-
-// func Login() gin.HandlerFunc {
-// 	return func(c *gin.Context) {
-// 		var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
-// 		var user models.User
-// 		var foundUser models.User
-
-// 		if err := c.BindJSON(&user); err != nil {
-// 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-// 			return
-// 		}
-
-// 		err := userCollection.FindOne(ctx, bson.M{"email": user.Email}).Decode(&foundUser)
-// 		defer cancel()
-// 		if err != nil {
-// 			c.JSON(http.StatusInternalServerError, gin.H{"error": "email or password is incorrect"})
-// 			return
-// 		}
-
-// 		passwordIsValid, msg := VerifyPassword(*user.Password, *foundUser.Password)
-// 		defer cancel()
-// 		if passwordIsValid != true {
-// 			c.JSON(http.StatusInternalServerError, gin.H{"error": msg})
-// 			return
-// 		}
-
-// 		if foundUser.Email == nil {
-// 			c.JSON(http.StatusInternalServerError, gin.H{"error": "user not found"})
-// 		}
-// 		token, refreshToken, _ := helpers.GenerateAllTokens(*foundUser.Email, *foundUser.First_name, *foundUser.Last_name, *foundUser.User_type, *&foundUser.User_id)
-// 		helpers.UpdateAllTokens(token, refreshToken, foundUser.User_id)
-// 		err = userCollection.FindOne(ctx, bson.M{"user_id": foundUser.User_id}).Decode(&foundUser)
-
-// 		if err != nil {
-// 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-// 			return
-// 		}
-// 		c.JSON(http.StatusOK, foundUser)
-// 	}
-// }
 
 func Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
