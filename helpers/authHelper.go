@@ -7,7 +7,7 @@ import (
 )
 
 func CheckUserType(c *gin.Context, role string) (err error) {
-	userType, exists := c.Get("user_type")
+	userType, exists := c.Get("User_type")
 	if !exists {
 		err = errors.New("user_type not found in context")
 		return
